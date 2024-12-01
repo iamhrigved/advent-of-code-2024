@@ -1,7 +1,7 @@
 fn main() {
     println!("DAY 1!!!");
 
-    let input = include_str!("../../input/day1.txt");
+    let input = include_str!("../../input/day1.txt"); // input file
 
     let (part1, part2) = answer(input);
     println!("Answer to Part 1 is {}", part1);
@@ -27,7 +27,7 @@ fn answer(input: &str) -> (u32, u32) {
     }
 
     // get answer to the second part
-    // (calculated first, because the second part requires the elements of the vectors to be removed)
+    // (calculated first, because the first part requires the elements of the vectors to be removed)
     for num in &numbers_left {
         answer.1 += *num * find_num(*num, &numbers_right);
     }
@@ -45,6 +45,7 @@ fn answer(input: &str) -> (u32, u32) {
     answer
 }
 
+// returns the index of the smallest number in the list
 fn find_min(numbers: &[u32]) -> usize {
     let mut min = numbers[0];
     let mut index_min = 0;
@@ -57,6 +58,7 @@ fn find_min(numbers: &[u32]) -> usize {
     index_min
 }
 
+// returns the number of times an element appears in the list
 fn find_num(num: u32, numbers: &[u32]) -> u32 {
     let mut times: u32 = 0;
 
