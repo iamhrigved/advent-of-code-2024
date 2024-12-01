@@ -1,12 +1,14 @@
 <h1 align="center">🎄 Advent of Code 2024 in Rust 🦀</h2>
 
 <p align="center">
-    <img width="200" src=".assets/winter-ferris.png">
+    <img width="250" src=".assets/winter-ferris.png">
 </p>
 
-These are my solutions to the [Advent of Code 2024](https://www.adventofcode.com/2024/) implemented in our beloved programming language, [Rust](https://www.rust-lang.org/).
+---
 
-## Usage
+These are my solutions to the [Advent of Code 2024](https://www.adventofcode.com/2024/) implemented in the [Rust](https://www.rust-lang.org/) programming language.
+
+## Setup
 
 **Step 1:** Install [Rust](https://www.rust-lang.org/)
 
@@ -29,9 +31,17 @@ And... you are done!
 All binaries are named as day{1-25}. To run one of the binaries, run
 
 ```sh
-cargo run day{X}
+cargo run day{X} # replace {X} with a number between 1 to 25
 ```
 
-where {X} is a number between 1 to 25.
+You can also test the functionality of these programs by running
 
-Have fun :)
+```sh
+cargo test day{X}
+```
+
+Have fun!
+
+## About me
+
+I am just a noob trying to learn Rust and I will be updating these solutions as I learn more and more about this beautiful programming language ;)
