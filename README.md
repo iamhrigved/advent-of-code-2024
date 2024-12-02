@@ -31,13 +31,13 @@ And... you are done!
 All binaries are named as day{1-25}. To run one of the binaries, run
 
 ```sh
-cargo run day{X} # replace {X} with a number between 1 to 25
+cargo run --bin day{X} # replace {X} with a number between 1 to 25
 ```
 
-You can also test the functionality of these programs by running
+You can also test the functionality of a specific binary by running
 
 ```sh
-cargo test day{X}
+cargo test --bin day{X}
 ```
 
 Have fun!
