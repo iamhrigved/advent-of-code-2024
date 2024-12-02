@@ -11,88 +11,67 @@ fn main() {
 fn answer(input: &str) -> (u32, u32) {
     let mut count: (u32, u32) = (0, 0);
 
-    'outer: for line in input.lines() {
-        let levels: Vec<&str> = line.split(" ").collect();
+    for line in input.lines() {
+        let mut levels: Vec<i32> = Vec::new();
+        line.split(" ")
+            .for_each(|lev| levels.push(lev.parse().unwrap()));
+        // convert &str to list of numbers
 
+        // if already safe
         if check_safe(&levels) {
-            count.0 += 1; // safe counts without removing elements
-        } else {
-            let mut levels_temp = levels.clone();
+            count.0 += 1;
+            count.1 += 1;
+            continue;
+        }
 
-            // remove a single element one by one and check if safe or not
-            for i in 0..levels.len() {
-                levels_temp.remove(i);
-
-                if check_safe(&levels_temp) {
-                    count.1 += 1; // safe counts after removing elements
-                    continue 'outer;
-                }
-                levels_temp = levels.clone();
+        // if not safe already
+        // check by removing elements one by one
+        for i in 0..levels.len() {
+            // if a safe is found
+            if check_safe_remove(&levels, i) {
+                count.1 += 1;
+                break;
             }
         }
     }
 
-    (count.0, count.0 + count.1)
+    count
 }
 
 // checks if a list of levels is safe (see the problem instructions)
-fn check_safe(list: &Vec<&str>) -> bool {
-    if !is_sorted(list) {
-        return false;
-    }
-    for i in 1..list.len() {
-        let diff = diff_str(list[i - 1], list[i]);
-        if diff > 3 || diff < -3 {
-            // absolute difference > 3
-            return false;
+fn check_safe(list: &Vec<i32>) -> bool {
+    let mut only_inc = true;
+    let mut only_dec = true;
+    let mut is_ok = true;
+
+    for i in 0..list.len() - 1 {
+        let diff = list[i] - list[i + 1];
+        if diff >= 0 {
+            only_inc = false
+        }
+        if diff <= 0 {
+            only_dec = false
+        }
+        if diff.abs() > 3 {
+            is_ok = false
         }
     }
 
-    true
+    is_ok && (only_inc || only_dec)
 }
 
-// checks if the list is sorted in either ascending or descending order (repetition not allowed)
-fn is_sorted(list: &Vec<&str>) -> bool {
-    if list.len() <= 1 {
-        return true;
-    }
+// removes the element at index and rechecks if safe
+fn check_safe_remove(list: &Vec<i32>, index: usize) -> bool {
+    let mut list_copy = list.clone();
 
-    // declare ascending or descending
-    let mut asc = true;
-    if diff_str(list[0], list[1]) > 0 {
-        asc = false;
-    }
+    list_copy.remove(index);
 
-    for i in 1..list.len() {
-        if asc {
-            if diff_str(list[i - 1], list[i]) >= 0 {
-                return false;
-            }
-        } else if diff_str(list[i - 1], list[i]) <= 0 {
-            return false;
-        }
-    }
-
-    true
-}
-
-fn diff_str(x_str: &str, y_str: &str) -> i32 {
-    let x: i32 = x_str.parse().unwrap();
-    let y: i32 = y_str.parse().unwrap();
-
-    x - y
+    check_safe(&list_copy)
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
-
-    #[test]
-    fn test_diff_str() {
-        let x_str = "189";
-        let y_str = "122";
-        assert_eq!(diff_str(x_str, y_str), 67);
-    }
 
     #[test]
     fn test_day2() {
