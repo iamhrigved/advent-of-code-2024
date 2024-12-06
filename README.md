@@ -45,9 +45,6 @@ cargo test --bin day{X}
 
 Have fun!
 
-> [!NOTE]
-> All inputs have been removed because I didn't read the instructions [here](https://adventofcode.com/2024/about).
-
 ## About me
 
 I am just a noob trying to learn Rust and I will be updating these solutions as I learn more and more about this beautiful programming language ;)
