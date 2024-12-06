@@ -28,6 +28,9 @@ And... you are done!
 
 ## Usage
 
+> [!NOTE]
+> All inputs have been removed because I didn't read the instructions [here](https://adventofcode.com/2024/about).
+
 All binaries are named as day{1-25}. To run one of the binaries, run
 
 ```sh
